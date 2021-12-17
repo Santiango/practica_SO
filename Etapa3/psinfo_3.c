@@ -4,6 +4,7 @@
 #include <sys/utsname.h>
 #include <errno.h>
 
+
 int imprimirInformacion(FILE *arch){
     
     char line[1024];
@@ -28,9 +29,6 @@ int imprimirInformacion(FILE *arch){
         if(strcmp(token,"vmStk")==0){
             printf("\tTamaño de la memoria de la región DATA: %s\n",auxiliar1);
         }
-        if(strcmp(token,"vmStk")==0){
-            printf("\tTamaño de la memoria de la región DATA: %s\n",auxiliar1);
-        }
         if(strcmp(token,"VmExe")==0){
             printf("\tTamaño total de la memoria de la región STACK: %s\n",auxiliar1);
         }
@@ -50,42 +48,47 @@ int imprimirInformacion(FILE *arch){
 }
 
 int imprimirEnArchivo(FILE *arch,FILE *archSalida){
-    
+    char aux[1024];
     char line[1024];
     char *token, *auxiliar1;
     int i = 0;
-    fprintf(archSalida, "Informe\n");
+
     while (fgets(line,1024,arch))
     {
         token = strtok(line,":");
         auxiliar1 = strtok(NULL,"\n");
         if(strcmp(token,"Name")==0){
-            fprintf(archSalida,"Nombre del proceso: %s\n",auxiliar1);
+            sprintf(aux,"Nombre del proceso: %s\n",auxiliar1);
+            fputs(aux,archSalida);
         }
         if(strcmp(token,"State")==0){
-            fprintf(archSalida,"Estado: %s\n",auxiliar1);
+            sprintf(aux,"Estado: %s\n",auxiliar1);
+            fputs(aux,archSalida);
         }
         if(strcmp(token,"VmSize")==0){
-            fprintf(archSalida,"Tamaño total de la memoria: %s\n",auxiliar1);
+            sprintf(aux,"Tamaño total de la memoria: %s\n",auxiliar1);
+            fputs(aux,archSalida);
         }
         if(strcmp(token,"VmData")==0){
-            fprintf(archSalida,"\tTamaño total de la memoria de la región TEXT: %s\n",auxiliar1);
+            sprintf(aux,"\tTamaño total de la memoria de la región TEXT: %s\n",auxiliar1);
+            fputs(aux,archSalida);
         }
         if(strcmp(token,"vmStk")==0){
-            fprintf(archSalida,"\tTamaño de la memoria de la región DATA: %s\n",auxiliar1);
-        }
-        if(strcmp(token,"vmStk")==0){
-            fprintf(archSalida,"\tTamaño de la memoria de la región DATA: %s\n",auxiliar1);
+            sprintf(aux,"\tTamaño total de la memoria de la región DATA: %s\n",auxiliar1);
+            fputs(aux,archSalida);
         }
         if(strcmp(token,"VmExe")==0){
-            fprintf(archSalida,"\tTamaño total de la memoria de la región STACK: %s\n",auxiliar1);
+            sprintf(aux,"\tTamaño total de la memoria de la región STACK: %s\n",auxiliar1);
+            fputs(aux,archSalida);
         }
         if(strcmp(token,"voluntary_ctxt_switches")==0){
-            fprintf(archSalida,"Número de cambios de contexto realizados (voluntarios - no voluntarios): %s",auxiliar1);
+            sprintf(aux,"Número de cambios de contexto realizados (voluntarios - no voluntarios): %s",auxiliar1);
+            fputs(aux,archSalida);
         }
         if (strcmp(token, "nonvoluntary_ctxt_switches") == 0)
         {
-            fprintf(archSalida," - %s\n",auxiliar1);
+            sprintf(aux," - %s\n",auxiliar1);
+            fputs(aux,archSalida);
         }
 
         i++;
