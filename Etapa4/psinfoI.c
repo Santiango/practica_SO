@@ -167,5 +167,5 @@ int infoError(int e)
     fprintf(stdout, "-l seguido de una lista de Pid separados por espacio: devuelve el status de cada proceso\n");
     fprintf(stdout, "-r seguido de una lista de Pid separados por espacio: crea un archivo con la información del status de cada proceso\n");
 
-    return EXIT_FAILURE;
+    exit(e);
 }
