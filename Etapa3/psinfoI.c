@@ -3,6 +3,15 @@
 #include "psinfo.h"
 #include <stdlib.h>
 
+
+
+/*
+Función que abre el file donde se encuentra la información del proceso
+ 
+Recibe como parámetro el Pid del proceso
+ 
+Retorna el File abierto
+*/
 FILE *abrirArchivo(char proc[])
 {
 
@@ -11,7 +20,14 @@ FILE *abrirArchivo(char proc[])
     FILE *arch = fopen(archivo, "r");
     return arch;
 }
-
+/*
+Función que imprime la información necesitada del file del status del proceso
+ 
+Recibe como parámetro dos File:
+arch: donde se encuentra la información del status del proceso
+out: donde será imprimida la información del proceso
+ 
+*/
 int imprimirInformacion(FILE *arch, FILE *out)
 {
     char line[1024];
@@ -57,6 +73,13 @@ int imprimirInformacion(FILE *arch, FILE *out)
 
     return 0;
 }
+
+/*
+Función que crea en la memoria dinámica una estructura con la información referente al status de cada proceso y imprime la información
+Recibe como parámetro un int y un arreglo de apuntadores de tipo char:
+nProc: número de procesos a consultar
+proc[]: array con las direcciones de los pid de cada proceso
+*/
 
 int guardarInformacion(int nProc, char *proc[])
 {
@@ -115,6 +138,15 @@ int guardarInformacion(int nProc, char *proc[])
 
     return 0;
 }
+
+/*
+Función imprime la información del status de cada proceso en un file
+Recibe como parámetro un int y un arreglo de apuntadores de tipo char:
+nProc: número de procesos a consultar
+proc[]: array con las direcciones de los pid de cada proceso
+*/
+
+
 int escribirFile(int nProc, char *proc[])
 {
 

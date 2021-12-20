@@ -4,6 +4,13 @@
 
 
 
+/*
+Función que abre el file donde se encuentra la información del proceso
+ 
+Recibe como parámetro el Pid del proceso
+ 
+Retorna el File abierto
+*/
 
 FILE* abrirArchivo(char proc[])
 {
@@ -15,6 +22,14 @@ FILE* abrirArchivo(char proc[])
 }
 
 
+/*
+Función que imprime la información necesitada del file del status del proceso
+ 
+Recibe como parámetro dos File:
+arch: donde se encuentra la información del status del proceso
+out: donde será imprimida la información del proceso
+ 
+*/
 
 int imprimirInformacion(FILE *arch,FILE *out)
 {
