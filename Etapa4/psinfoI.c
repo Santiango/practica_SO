@@ -9,6 +9,10 @@ FILE *abrirArchivo(char proc[])
     char archivo[1024];
     sprintf(archivo, "/proc/%s/status", proc);
     FILE *arch = fopen(archivo, "r");
+    if (!arch)
+    {
+        infoError(2);
+    }
     return arch;
 }
 
@@ -136,6 +140,7 @@ int escribirFile(int nProc, char *proc[])
     for (int i = 0; i < nProc; i++)
     {
         FILE *arch = abrirArchivo(proc[i]);
+
         imprimirInformacion(arch, fileInfo);
         fprintf(fileInfo, "-------------------------------------------------------------------------\n");
         fclose(arch);
@@ -145,5 +150,22 @@ int escribirFile(int nProc, char *proc[])
 int infoError(int e)
 {
 
-    
+    switch (e)
+    {
+    case 1:
+        fprintf(stderr, "Debes especificar un id de proceso\n");
+        break;
+    case 2:
+        fprintf(stderr, "Pid con formato erroneo o inexistente \n");
+        break;
+    case 3:
+        fprintf(stderr, "Comando invalido\n");
+        break;
+    }
+    fprintf(stdout, "Comandos validos:\n");
+    fprintf(stdout, "Pid del proceso: devuelve la información del status de único proceso\n");
+    fprintf(stdout, "-l seguido de una lista de Pid separados por espacio: devuelve el status de cada proceso\n");
+    fprintf(stdout, "-r seguido de una lista de Pid separados por espacio: crea un archivo con la información del status de cada proceso\n");
+
+    return EXIT_FAILURE;
 }

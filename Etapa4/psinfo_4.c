@@ -10,37 +10,37 @@ int main(int argc, char *argv[])
 
     if (argc < 2)
     {
-        fprintf(stderr, "Debes especificar un id de proceso\n");
-        return EXIT_FAILURE;
+        infoError(1);
     }
 
     if (argc == 2)
     {
 
         FILE *arch = abrirArchivo(argv[1]);
-        if (!arch)
-        {
-            fprintf(stderr, "Error abriendo el archivo \n");
-            return EXIT_FAILURE;
-        }
-        else
-        {
-            imprimirInformacion(arch, stdout);
-            fclose(arch);
-        }
+
+        imprimirInformacion(arch, stdout);
+        fclose(arch);
     }
 
     if (argc > 2)
     {
+
         if (strcmp(argv[1], "-l") == 0)
         {
             guardarInformacion(argc - 2, &argv[2]);
         }
-
-        if (strcmp(argv[1], "-r") == 0)
+        else
         {
 
-            escribirFile(argc - 2, &argv[2]);
+            if (strcmp(argv[1], "-r") == 0)
+            {
+
+                escribirFile(argc - 2, &argv[2]);
+            }
+            else
+            {
+                infoError(3);
+            }
         }
     }
     exit(0);
