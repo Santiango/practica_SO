@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "psinfo.h"
-#include <stdlib.h>
+
 
 
 
